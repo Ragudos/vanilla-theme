@@ -1,0 +1,22 @@
+{
+  "name": "vanilla-theme",
+  "version": "0.1.0",
+  "description": "A small library to quickly add a light and dark mode functionality in you Vanilla JavaScript application",
+  "main": "build/index.mjs",
+  "types": "build/@types/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "build": "node esbuild.build.js && tsc --build",
+    "dev": "node esbuild.dev.js"
+  },
+  "keywords": [
+    "Vanilla Theme",
+    "light-dark-mode"
+  ],
+  "author": "Aaron",
+  "license": "MIT",
+  "devDependencies": {
+    "esbuild": "^0.19.4",
+    "typescript": "^5.2.2"
+  }
+}
