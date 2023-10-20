@@ -12,7 +12,7 @@ const media_query = window.matchMedia("(prefers-color-scheme: dark)");
 function set_theme() {
     const html = document.documentElement;
     const class_list = html.classList;
-    let stored_theme: undefined | string;
+    let stored_theme: undefined | null | string;
 
     if (aborter) {
         aborter.abort();
@@ -24,9 +24,13 @@ function set_theme() {
     }
 
     if (storage == "localStorage") {
-        stored_theme = localStorage.getItem("theme") ?? default_theme;
+        stored_theme = localStorage.getItem("theme");
     } else if (storage == "sessionStorage") {
-        stored_theme = sessionStorage.getItem("theme") ?? default_theme;
+        stored_theme = sessionStorage.getItem("theme");
+    }
+
+    if (stored_theme == null || (stored_theme != "dark" && stored_theme != "light" && stored_theme != "system")) {
+        stored_theme = default_theme;
     }
 
     if (stored_theme == "dark" || stored_theme == "light") {
@@ -87,6 +91,11 @@ export function change_theme(theme: Theme) {
     }
 
     set_theme();
+}
+
+/** The default fallback if a value is neither dark, light, nor system. */
+export function set_default(defaultTheme: Theme) {
+    default_theme = defaultTheme;
 }
 
 window.addEventListener("DOMContentLoaded", set_theme);

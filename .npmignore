@@ -4,3 +4,5 @@ src
 dev
 esbuild*
 tsconfig*
+.yarn*
+pnp*
