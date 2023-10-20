@@ -5,4 +5,4 @@ dev
 esbuild*
 tsconfig*
 .yarn*
-pnp*
+.pnp*
