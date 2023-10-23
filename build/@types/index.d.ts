@@ -1,4 +1,5 @@
 type Theme = "dark" | "light" | "system";
+export declare function subscribe_to_theme_changes(subscriber: (theme: Theme) => void): () => void;
 /** Changes the theme to either
  *
  *  - `light`
