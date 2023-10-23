@@ -6,7 +6,7 @@ await esbuild.build({
     sourcemap: true,
     outdir: "build",
     logLevel: "debug",
-    format: "iife",
+    format: "esm",
     keepNames: true,
     outExtension: {
         ".js": ".min.mjs",

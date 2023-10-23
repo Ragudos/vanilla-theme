@@ -12,7 +12,7 @@ const ctx = await esBuild.context({
         js: "(() => { (new EventSource(\"/esbuild\")).addEventListener('change', () => location.reload()); })();",
     },
     logLevel: "info",
-    format: "iife",
+    format: "esm",
     minify: true,
     keepNames: true,
 });

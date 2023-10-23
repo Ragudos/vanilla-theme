@@ -93,6 +93,10 @@ export function change_theme(theme: Theme) {
     set_theme();
 }
 
+export function set_storage(setStorage: "localStorage" | "sessionStorage") {
+    storage = setStorage;
+}
+
 /** The default fallback if a value is neither dark, light, nor system. */
 export function set_default(defaultTheme: Theme) {
     default_theme = defaultTheme;

@@ -8,3 +8,7 @@ Added the ability to change the default fallback
 ## v0.1.10
 
 Fixed package.json
+
+## v0.1.11
+
+Fixed build format to be ESM and added set_storage() function
