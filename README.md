@@ -12,3 +12,7 @@ Fixed package.json
 ## v0.1.11
 
 Fixed build format to be ESM and added set_storage() function
+
+## v0.1.12
+
+Added the ability to listen to theme change \(If the theme is system, the update value to be passed is either dark or light depending on the preferred theme of a user in CSS Media Query.\).

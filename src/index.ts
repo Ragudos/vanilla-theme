@@ -6,8 +6,27 @@ let default_theme: Theme = "system";
 let attribute: "class" | "data-theme" = "class";
 let color_scheme: boolean = true;
 let aborter: undefined | AbortController = undefined;
+const subscribers: Map<number, (theme: Theme) => void> = new Map();
+let subscribers_length = 0;
 
 const media_query = window.matchMedia("(prefers-color-scheme: dark)");
+
+export function subscribe_to_theme_changes(subscriber: (theme: Theme) => void) {
+    const id = subscribers_length++;
+
+    subscribers.set(id, subscriber);
+
+    return () => {
+        subscribers.delete(id);
+        subscribers_length--;
+    };
+}
+
+function update(theme: Theme) {
+    for (const subscriber of subscribers.values()) {
+        subscriber(theme);
+    }
+}
 
 function set_theme() {
     const html = document.documentElement;
@@ -43,6 +62,8 @@ function set_theme() {
         if (color_scheme) {
             html.style.colorScheme = stored_theme;
         }
+
+        update(stored_theme);
     } else {
         if (media_query.matches) {
             if (attribute == "class") {
@@ -54,6 +75,8 @@ function set_theme() {
             if (color_scheme) {
                 html.style.colorScheme = "dark";
             }
+
+            update("light");
         } else {
             if (attribute == "class") {
                 class_list.add("light");
@@ -64,6 +87,8 @@ function set_theme() {
             if (color_scheme) {
                 html.style.colorScheme = "light";
             }
+
+            update("dark");
         }
         
         aborter = new AbortController();
